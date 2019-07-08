@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+{% set active_page = "mods" %}
+{% block content %}
+
+<form method="post" name="mods" action="/mods">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox"  class="custom-control-input" checked>
+                  <label class="custom-control-label"  for="enablemod">Toggle All</label>
+              </div>
+            </th>
+            <th scope="col">Mod Name</th>
+            <th scope="col">Placeholder</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mod in mods %}
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" name="{{ mod }}" class="custom-control-input" id="enablemod" checked>
+                  <label class="custom-control-label" for="enablemod"></label>
+              </div>
+            </td>
+            <td>{{mod}}</td>
+            <td>Placeholder</td>
+            {% endfor %}
+          </tr>
+          {% for mod in newmods %}
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" name="{{ mod }}" class="custom-control-input" id="enablemod">
+                  <label class="custom-control-label" for="enablemod"></label>
+              </div>
+            </td>
+            <td>{{mod}}</td>
+            <td>Placeholder</td>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<input type="submit" name="refreshlist" value="Refresh List">
+<input type="submit" name="applychanges" value="Apply Changes">
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <h3>{{ message }}</h3>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% endblock %}
