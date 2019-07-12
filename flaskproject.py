@@ -24,15 +24,15 @@ def index():
 def reboot():
    if "stop" in request.form:
       flash('Stopping.')
-      subprocess.call(["/usr/bin/sudo", "scripts/stop.sh"])
+      subprocess.Popen(["/usr/bin/sudo", "scripts/stop.sh"])
       return render_template('reboot.html', status=subprocess.run(["scripts/status.sh"], stdout=subprocess.PIPE).stdout.decode())
    elif "start" in request.form:
       flash('Starting.')
-      subprocess.call(["/usr/bin/sudo", "scripts/start.sh"])
+      subprocess.Popen(["/usr/bin/sudo", "scripts/start.sh"])
       return render_template('reboot.html', status=subprocess.run(["scripts/status.sh"], stdout=subprocess.PIPE).stdout.decode())
    elif "restart" in request.form:
       flash('Restarting.')
-      subprocess.call(["/usr/bin/sudo", "scripts/restart.sh"])
+      subprocess.Popen(["/usr/bin/sudo", "scripts/restart.sh"])
       return render_template('reboot.html', status=subprocess.run(["scripts/status.sh"], stdout=subprocess.PIPE).stdout.decode())
    else:
       return render_template('reboot.html', status=subprocess.run(["scripts/status.sh"], stdout=subprocess.PIPE).stdout.decode())
